@@ -25,7 +25,11 @@ CMake suite maintained and supported by Kitware (kitware.com/cmake).
 cmake -S . -B ./build
 ```
 -S 指定要编译的项目的CMakeLists.txt文件所在的目录
--B 生成的项目文件保存的目录
+-B 生成的项目文件保存的目录, 这种方式可以代替
+```shell
+mkdir build && cd build
+```
+
 默认添加 -G 参数, 如在windows:
 
 ```shell
