@@ -21,6 +21,13 @@ target_include_directories(
         PUBLIC include
 )
 
+if (WIN32)
+    # 为 calc 编译添加宏定义
+    target_compile_definitions(calc
+            PRIVATE LIB_STORAGE_SHARED LIB_STORAGE_SHARED_EXPORT
+    )
+endif ()
+
 # calc 是 动态库 target,
 # 在windows中认为是 runtime, 输出目录由 RUNTIME_OUTPUT_DIRECTORY 属性决定
 # 在 linux/macos 中认为是 library, 输出目录由 LIBRARY_OUTPUT_DIRECTORY 属性决定
@@ -37,4 +44,5 @@ set(CALC_LIB_PATH "${CMAKE_SOURCE_DIR}/build/output/calc_lib")
 set_target_properties(calc PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CALC_LIB_PATH}
         LIBRARY_OUTPUT_DIRECTORY ${CALC_LIB_PATH}
+        ARCHIVE_OUTPUT_DIRECTORY ${CALC_LIB_PATH}
 )

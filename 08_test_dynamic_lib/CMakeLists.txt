@@ -8,19 +8,10 @@ file(GLOB_RECURSE DEMO_SRC_LIST
         src/*.cpp
 )
 
-# 为所有 target 设置链接的库的名称, 推荐使用 target_link_libraries 代替
-#link_libraries(
-#        calc
-#)
-
-# 为所有的 target 设置搜索库的目录, 推荐使用 target_link_directories 代替
-#link_directories(
-#        "${PROJECT_SOURCE_DIR}/lib"
-#)
-
-# 为所有 target 设置头文件搜索目录, 推荐使用 target_include_directories 代替
-#include_directories(
-#         ${PROJECT_SOURCE_DIR}/include
+#add_library(calc SHARED IMPORTED)
+#set_target_properties(calc PROPERTIES
+##        IMPORTED_IMPLIB "${CMAKE_SOURCE_DIR}/lib/calc.lib"   # 虚构的.lib路径（占位）
+#        IMPORTED_LOCATION "${CMAKE_SOURCE_DIR}/lib/calc.dll" # 实际.dll路径
 #)
 
 add_executable(
@@ -29,6 +20,7 @@ add_executable(
 )
 
 # 为目标指定链接库的名称
+# Windows平台下动态库的链接机制与Linux/macOS不同，CMake在链接阶段需要.lib文件（动态库的导入库），而非直接使用.dll文件
 target_link_libraries(
         demo
         PRIVATE calc
@@ -46,6 +38,13 @@ target_include_directories(
         PRIVATE include
 )
 
+# 实测可以加这个定义, 也可以不加
+#if (WIN32)
+#    target_compile_definitions(demo
+#            PRIVATE LIB_STORAGE_SHARED
+#    )
+#endif ()
+
 # 配置输出目录
 set_target_properties(demo PROPERTIES
         # exe文件输出目录
@@ -56,3 +55,12 @@ set_target_properties(demo PROPERTIES
         # 对exe无效
         ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output/archive"
 )
+
+if (WIN32)
+    # 将 lib/calc.dll 复制到exe输出目录
+    add_custom_command(TARGET demo POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy
+            "${CMAKE_SOURCE_DIR}/lib/calc.dll"
+            "${CMAKE_SOURCE_DIR}/build/output/runtime/Release"
+    )
+endif ()
