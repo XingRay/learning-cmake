@@ -8,12 +8,37 @@ message(STATUS "hello")
 #输出: world
 message(STATUS world)
 
+# 日志级别
+# 通知(默认)消息,用于输出信息。
+message("important message")
+message(NOTICE "notice message")
+# 状态消息 有 -- ，看起来更重要
+message(STATUS "normal message")
+
+# 调试信息
+message(VERBOSE "verbose message")
+message(DEBUG "debug message")
+message(TRACE "trace message")
+
+# 警告信息， 程序会继续执行
+# 一般警告, 表示使用者需要注意
+message(WARNING "warning message")
+# 用于开发时的警告，用 -Wno-dev 忽略
+message(AUTHOR_WARNING "author warning message")
+# 表示该功能弃用的警告
+message(DEPRECATION "deprecation warning message")
+
+# 错误,跳过生成步骤,继续执行后面程序
+#message(SEND_ERROR "send error message")
+# 错误,构建终止
+#message(FATAL_ERROR "fatal error message")
+
 
 # set(var_name value0 value1 ... )
 # value 可以用空格间隔, 也可以用 ";" 间隔
 set(var1 a b c)
 set(var2 c;d;e)
-# 底层存储都是 a;b;c 的形式,但是打印出来不会显示 ";"
+# 底层存储都是 a;b;c 的形式
 
 # 输出: var1,
 # 注意要取变量中的值, 要使用 ${var_name} 的形式, 直接使用 var_name 会被当做字符串字面值
@@ -22,6 +47,11 @@ message(STATUS var1)
 # 输出 abc
 # 通过 ${var_name} 取到变量保存的值, message不会输出元素之间的";"
 message(STATUS ${var1})
+
+# var1:a;b;c
+# 通过 ${var_name} 取到变量保存的值拼接到字符串中, message会输出元素之间的";"
+message(STATUS "var1:${var1}")
+
 
 # 设置 C++ 标准, 11 14 17 20 23 26
 
