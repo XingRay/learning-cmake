@@ -3,8 +3,9 @@
 //
 
 #include <cstdio>
-#include "calc/Add.h"
 #include <format>
+
+#include "calc/Add.h"
 
 int main(int argc, const char **argv) {
     printf("hello cmake\n");

@@ -4,8 +4,8 @@
 
 #include "Add.h"
 
-namespace test {
+namespace calc {
     int Add::add(int a, int b) {
         return a + b;
     }
-} // test
+} // calc

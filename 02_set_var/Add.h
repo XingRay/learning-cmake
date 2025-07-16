@@ -4,9 +4,9 @@
 
 #pragma once
 
-namespace test {
+namespace calc {
     class Add {
     public:
         int add(int a, int b);
     };
-} // test
+} // calc

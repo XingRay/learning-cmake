@@ -9,4 +9,4 @@ namespace calc {
     public:
         int add(int a, int b);
     };
-} // test
+} // calc
