@@ -4,7 +4,7 @@
 
 #pragma once
 
-namespace calc {
+namespace test {
     class Add {
     public:
         int add(int a, int b);
