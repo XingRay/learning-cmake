@@ -57,7 +57,7 @@ set_target_properties(demo PROPERTIES
 )
 
 if (WIN32)
-    # 将 lib/calc.dll 复制到exe输出目录
+    # 构建完成后, 将 lib/calc.dll 复制到exe输出目录
     add_custom_command(TARGET demo POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_SOURCE_DIR}/lib/calc.dll"
