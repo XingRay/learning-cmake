@@ -43,13 +43,15 @@ target_include_directories(
         demo
         PUBLIC include
 )
+# target_include_directories 指令与直接设置属性 INCLUDE_DIRECTORIES 的值等效,
+# 但是通常使用 target_include_directories 指令
+#set_target_properties(demo PROPERTIES
+#        INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/include"
+#)
+
 get_target_property(demo_target_include_dirs demo INCLUDE_DIRECTORIES)
 message("demo_target_include_dirs:${demo_target_include_dirs}")
 
 set_target_properties(demo PROPERTIES
-        # target_include_directories 指令与直接设置属性 INCLUDE_DIRECTORIES 的值等效,
-        # 但是通常使用 target_include_directories 指令
-#        INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/include"
-
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output"
 )

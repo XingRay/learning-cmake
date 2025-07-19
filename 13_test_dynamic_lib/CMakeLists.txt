@@ -57,8 +57,14 @@ set_target_properties(demo PROPERTIES
 )
 
 if (WIN32)
-    # 构建完成后, 将 lib/calc.dll 复制到exe输出目录
+    # path/to/cmake.exe
+    message("CMAKE_COMMAND:${CMAKE_COMMAND}")
+    # (CMakeLists.txt).dir
+    message("CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR}")
+
+    # 构建完成后, 将 lib/calc.dll 复制到exe输出目录中, exe启动时会自动加载 dll 文件
     add_custom_command(TARGET demo POST_BUILD
+            # cmake -E copy ./lib/calc.dll ./build/output/runtime/Release/calc.dll
             COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_SOURCE_DIR}/lib/calc.dll"
             "${CMAKE_SOURCE_DIR}/build/output/runtime/Release"

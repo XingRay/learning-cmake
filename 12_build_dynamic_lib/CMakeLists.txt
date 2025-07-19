@@ -21,6 +21,7 @@ target_include_directories(
         PUBLIC include
 )
 
+# 如果在 windows 平台
 if (WIN32)
     # 为 calc 编译添加宏定义
     target_compile_definitions(calc

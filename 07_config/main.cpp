@@ -3,12 +3,10 @@
 //
 
 #include <cstdio>
-
-#include "Add.h"
+#include <format>
 
 int main(int argc, const char **argv) {
     printf("hello cmake\n");
 
-    calc::Add add;
-    printf("a:%d, b:%d, then a+b=%d", 4, 5, add.add(4, 5));
+    printf("%s", std::format("{}+{}={}\n", 4, 5, 4+5);
 }
