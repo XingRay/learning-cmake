@@ -24,6 +24,18 @@ file(GLOB GLOB_SRC_LIST
 # main.cpp
 message("GLOB_SRC_LIST:${GLOB_SRC_LIST}")
 
+# 获取相对路径  RELATIVE + 目标目录 , 返回相对于目标目录的相对路径, 如: src/main.cpp
+file(GLOB GLOB_SRC_LIST RELATIVE "${PROJECT_SOURCE_DIR}"
+        src/*.cpp
+        src/*.c
+        src/*.c++
+        src/*.cxx
+)
+# src/main.cpp
+message("GLOB_SRC_LIST:${GLOB_SRC_LIST}")
+
+
+
 # 搜索指定路径, 递归包括子目录, 符合要求的所有文件的路径存储到变量中
 file(GLOB_RECURSE SRC_LIST
         src/*.cpp

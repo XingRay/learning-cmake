@@ -1,6 +1,10 @@
 1 下载 CMake
 https://cmake.org/download/
 
+用户手册
+https://cmake.org/cmake/help/latest/index.html
+
+
 2 安装cmake
 下载安装cmake到自定义目录. 并添加到系统 path
 验证:
@@ -18,6 +22,8 @@ CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
 
 3 基本测试
+https://cmake.org/cmake/help/latest/manual/cmake.1.html
+
 执行命令:
 
 构建
