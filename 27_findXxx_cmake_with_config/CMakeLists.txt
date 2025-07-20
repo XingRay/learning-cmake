@@ -22,13 +22,7 @@ target_link_libraries(
         PRIVATE calc
 )
 
-#add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-#        COMMAND ${CMAKE_COMMAND} -E copy
-#        "${calc_sdk_root}/lib/calc.dll"
-#        $<TARGET_FILE_DIR:${PROJECT_NAME}>
-#)
-
-# 编译完成后将 calc.dll 文件复制到 exe 所在目录
+# 编译完成后将 calc.dll/so 文件复制到 exe 所在目录
 if (WIN32)
     add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy
