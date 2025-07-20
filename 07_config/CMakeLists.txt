@@ -50,6 +50,26 @@ set_target_properties(demo PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output/runtime"
 )
 
+# 通过指令设置编译选项
+add_compile_options("-g")
+
+# 通过设置变量设置编译选项
+set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -g -O0")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -g -O0")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -O2")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2")
+
+# 单独设置
+target_compile_options(
+        demo
+        PRIVATE "-g"
+)
+
+set_target_properties(demo PROPERTIES
+        CMAKE_C_FLAGS_DEBUG "-g"
+)
+
+
 # 其他预定义宏
 # windows: CMAKE_SYSTEM_NAME:Windows
 message("CMAKE_SYSTEM_NAME:${CMAKE_SYSTEM_NAME}")
