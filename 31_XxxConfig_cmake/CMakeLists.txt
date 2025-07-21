@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo) # 可以简化
+project(calc)
 set(CMAKE_CXX_STANDARD 23)
 
 file(GLOB_RECURSE CALC_SRC_LIST
@@ -73,12 +73,19 @@ install(EXPORT CalcModule
         # 导出的文件名 CalcModule.cmake CalcModule-release.cmake CalcModule-debug.cmake
         FILE CalcModule.cmake
         # 导出文件所在的目录(相对于 ${CMAKE_INSTALL_PREFIX}的目录)
-        # 实际目录 ${CMAKE_INSTALL_PREFIX}/calc/lib/cmake/${PROJECT_NAME}
-        DESTINATION "calc/lib/cmake/${PROJECT_NAME}"
+        # 实际目录 ${CMAKE_INSTALL_PREFIX}/calc/lib/cmake
+        DESTINATION "calc/lib/cmake"
+)
+
+install(FILES cmake/CalcConfig.cmake
+        DESTINATION "calc/lib/cmake"
+
+        # 打包相关
+        COMPONENT "cmake"
 )
 
 add_executable(demo
-        src/main.cpp
+        test/main.cpp
 )
 
 target_link_libraries(demo

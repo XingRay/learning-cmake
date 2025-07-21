@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo) # 可以简化
+project(demo)
 
 
 # 输出日志

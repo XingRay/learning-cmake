@@ -19,7 +19,7 @@ cmake_minimum_required(VERSION 3.31.6)
 #)
 
 # 可以简写
-project(demo) # 可以简化
+project(demo)
 
 # 创建可执行文件, 也就是创建一个类型为 exe 的 target
 add_executable(

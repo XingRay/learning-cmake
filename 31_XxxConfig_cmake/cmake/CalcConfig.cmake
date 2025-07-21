@@ -1,44 +1,69 @@
 # ======================================================
-#  MyLibrary CMake 配置文件
+#  Calc CMake 配置文件
 # ======================================================
 
 # ======================================================
 #  头文件搜索
 # ======================================================
-# 获取没有 ../.. 相对路径标记的绝对路径
-get_filename_component(ML_CONFIG_PATH "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
-get_filename_component(ML_INSTALL_PATH "${ML_CONFIG_PATH}/../../../" REALPATH)
 
-# 搜索，添加至全局变量 MyLibrary_INCLUDE_DIRS
-set(ML_INCLUDE_COMPONENTS "${ML_INSTALL_PATH}/include/MyLibrary")
-set(MyLibrary_INCLUDE_DIRS "")
-foreach(d ${ML_INCLUDE_COMPONENTS})
-    get_filename_component(_d "${d}" REALPATH)
-    if(NOT EXISTS "${_d}")
-        message(WARNING "MyLibrary: Include directory doesn't exist: '${d}'. MyLibrary installation may be broken. Skip...")
-    else()
-        list(APPEND MyLibrary_INCLUDE_DIRS "${_d}")
-    endif()
-endforeach()
-unset(_d)
+# 获取没有 ../.. 相对路径标记的绝对路径
+# xxx/dist/calc/cmake/CalcConfig.cmake
+get_filename_component(CALC_CONFIG_PATH "${CMAKE_CURRENT_LIST_DIR}" REALPATH)
+message("CALC_CONFIG_PATH:${CALC_CONFIG_PATH}")
+
+# 获取 xxx/dist/calc 目录
+# 1 xxx/dist/calc/cmake/CalcConfig.cmake => xxx/dist/calc/cmake
+get_filename_component(CALC_INSTALL_PATH "${CALC_CONFIG_PATH}" PATH)
+# 2 xxx/dist/calc/cmake => xxx/dist/calc
+get_filename_component(CALC_INSTALL_PATH "${CALC_INSTALL_PATH}" PATH)
+
+
+# 搜索头文件, 添加至全局变量 Calc_INCLUDE_DIRS
+# xxx/dist/calc/cmake/include
+set(CALC_INCLUDE_COMPONENTS "${CALC_INSTALL_PATH}/include")
+set(Calc_INCLUDE_DIRS "")
+foreach (include_component ${CALC_INCLUDE_COMPONENTS})
+    message("include_component:${include_component}")
+    # 转换为绝对路径
+    get_filename_component(include_component_real_path "${include_component}" REALPATH)
+
+    if (NOT EXISTS "${include_component_real_path}")
+        # 目录不存在,则报警告
+        message(WARNING "Calc: Include directory doesn't exist: '${include_component}'. Calc installation may be broken. Skip...")
+    else ()
+        # 添加到全局属性中
+        list(APPEND Calc_INCLUDE_DIRS "${include_component_real_path}")
+    endif ()
+endforeach ()
+unset(include_component_real_path)
+
 
 # ======================================================
 # 库文件搜索
 # ======================================================
 # 包含导出配置的 *.cmake 文件
-include(${CMAKE_CURRENT_LIST_DIR}/MyModules.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/CalcModule.cmake)
 
-# 添加至全局变量 MyLibrary_LIBS
-set(ML_LIB_COMPONENTS my_target;my_target_2)
-foreach(_mlcomponent ${ML_LIB_COMPONENTS})
-    set(MyLibrary_LIBS ${MyLibrary_LIBS} "${_mlcomponent}")
-endforeach()
+# 添加至全局变量 Calc_LIBS
+set(CALC_LIB_COMPONENTS calc)
+foreach (lib_component ${CALC_LIB_COMPONENTS})
+    message("list#APPEND Calc_LIBS: ${lib_component}")
+    list(APPEND Calc_LIBS "${lib_component}")
+endforeach ()
 
 # ======================================================
 # 搜寻的结果、状态
 # ======================================================
 include(FindPackageHandleStandardArgs)
+message("CALC_INSTALL_PATH:${CALC_INSTALL_PATH}")
+message("Calc_INCLUDE_DIRS:${Calc_INCLUDE_DIRS}")
+message("Calc_LIBS:${Calc_LIBS}")
 find_package_handle_standard_args(
-        MyLibrary
-        REQUIRED_VARS ML_INSTALL_PATH
+        Calc
+        # 注意这里要传入变量的名称 "CALC_INSTALL_PATH" 而不是变量的值,
+        # 如 ${CALC_INSTALL_PATH} 或者 "path/to/include" 都是错误的
+        # REQUIRED_VARS ${CALC_INSTALL_PATH} ${Calc_INCLUDE_DIRS} ${Calc_LIBS}
+
+        REQUIRED_VARS CALC_INSTALL_PATH Calc_INCLUDE_DIRS Calc_LIBS
 )
+message("Calc_FOUND:${Calc_FOUND}")
