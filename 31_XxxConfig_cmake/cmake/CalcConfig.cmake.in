@@ -13,14 +13,15 @@ message("CALC_CONFIG_PATH:${CALC_CONFIG_PATH}")
 
 # 获取 xxx/dist/calc 目录
 # 1 xxx/dist/calc/cmake/CalcConfig.cmake => xxx/dist/calc/cmake
-get_filename_component(CALC_INSTALL_PATH "${CALC_CONFIG_PATH}" PATH)
+get_filename_component(Calc_INSTALL_PATH "${CALC_CONFIG_PATH}" PATH)
 # 2 xxx/dist/calc/cmake => xxx/dist/calc
-get_filename_component(CALC_INSTALL_PATH "${CALC_INSTALL_PATH}" PATH)
+get_filename_component(Calc_INSTALL_PATH "${Calc_INSTALL_PATH}" PATH)
 
 
+set(Calc_BUILD_TYPE "@Calc_BUILD_TYPE@")
 # 搜索头文件, 添加至全局变量 Calc_INCLUDE_DIRS
 # xxx/dist/calc/cmake/include
-set(CALC_INCLUDE_COMPONENTS "${CALC_INSTALL_PATH}/include")
+set(CALC_INCLUDE_COMPONENTS "${Calc_INSTALL_PATH}/include")
 set(Calc_INCLUDE_DIRS "")
 foreach (include_component ${CALC_INCLUDE_COMPONENTS})
     message("include_component:${include_component}")
@@ -55,15 +56,15 @@ endforeach ()
 # 搜寻的结果、状态
 # ======================================================
 include(FindPackageHandleStandardArgs)
-message("CALC_INSTALL_PATH:${CALC_INSTALL_PATH}")
+message("Calc_INSTALL_PATH:${Calc_INSTALL_PATH}")
 message("Calc_INCLUDE_DIRS:${Calc_INCLUDE_DIRS}")
 message("Calc_LIBS:${Calc_LIBS}")
 find_package_handle_standard_args(
         Calc
-        # 注意这里要传入变量的名称 "CALC_INSTALL_PATH" 而不是变量的值,
-        # 如 ${CALC_INSTALL_PATH} 或者 "path/to/include" 都是错误的
-        # REQUIRED_VARS ${CALC_INSTALL_PATH} ${Calc_INCLUDE_DIRS} ${Calc_LIBS}
+        # 注意这里要传入变量的名称 "Calc_INSTALL_PATH" 而不是变量的值,
+        # 如 ${Calc_INSTALL_PATH} 或者 "path/to/include" 都是错误的
+        # REQUIRED_VARS ${Calc_INSTALL_PATH} ${Calc_INCLUDE_DIRS} ${Calc_LIBS}
 
-        REQUIRED_VARS CALC_INSTALL_PATH Calc_INCLUDE_DIRS Calc_LIBS
+        REQUIRED_VARS Calc_INSTALL_PATH Calc_INCLUDE_DIRS Calc_LIBS
 )
 message("Calc_FOUND:${Calc_FOUND}")

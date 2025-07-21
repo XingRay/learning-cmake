@@ -47,8 +47,31 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/output/archive)
 # 这个 target 在编译平台上是什么类型, 就设置对应的属性的值为想要输出的目录,
 # 如这里是windows平台下编译可执行文件, 那么设置 RUNTIME_OUTPUT_DIRECTORY 属性即可
 set_target_properties(demo PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output/runtime"
+        # 输出到 ${CMAKE_CURRENT_SOURCE_DIR}/build/output/runtime/Debug
+        # 或者 ${CMAKE_CURRENT_SOURCE_DIR}/build/output/runtime/Release
+        # 其他类型输出也一样会根据编译类型创建子目录
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/output/runtime
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/output/lib
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/build/output/lib
 )
+
+
+# 为编译类型精确指定目录:
+
+# Debug 配置输出路径
+#set_target_properties(demo PROPERTIES
+#        RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}/build/output/debug/runtime"
+#        LIBRARY_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}/build/output/debug/lib"
+#        ARCHIVE_OUTPUT_DIRECTORY_DEBUG "${CMAKE_CURRENT_SOURCE_DIR}/build/output/debug/lib"
+#)
+
+# Release 配置输出路径
+#set_target_properties(demo PROPERTIES
+#        RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/build/output/release/runtime"
+#        LIBRARY_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/build/output/release/lib"
+#        ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${CMAKE_CURRENT_SOURCE_DIR}/build/output/release/lib"
+#)
+
 
 # 通过指令设置编译选项
 add_compile_options("-g")
