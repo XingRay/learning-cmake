@@ -61,6 +61,16 @@ add_compile_options(
         $<$<CONFIG:Release>:-O2>
 )
 
+
+# 设置源码的编码
+if(MSVC)
+    add_compile_options("$<$<C_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+else()
+    add_compile_options(-finput-charset=UTF-8)
+endif()
+
+
 #[[
 
 常用生成器表达式
