@@ -19,6 +19,23 @@ set(CMAKE_CXX_STANDARD 20)
 # 也可以通过下面的指令设置
 # cmake -S . -B ./build -DCMAKE_CXX_STANDARD=20
 
+# 使用msvc时添加编译选项, 使用生成器表达式
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+# 在windows平台下添加指定编译选项
+message("WIN32:${WIN32}")
+if (WIN32)
+    # Windows 特定编译选项
+    add_compile_options(
+            /W4 /WX
+
+            # 关闭 C4100（未使用参数）警告
+            /wd4100
+            /wd4267
+    )
+
+endif ()
+
 
 set(SRC_LIST main.cpp)
 
