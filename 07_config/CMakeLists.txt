@@ -19,8 +19,14 @@ set(CMAKE_CXX_STANDARD 20)
 # 也可以通过下面的指令设置
 # cmake -S . -B ./build -DCMAKE_CXX_STANDARD=20
 
-# 使用msvc时添加编译选项, 使用生成器表达式
-add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+# 设置源码的编码
+if(MSVC)
+    add_compile_options("$<$<C_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+    add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+else()
+    add_compile_options(-finput-charset=UTF-8)
+endif()
 
 # 在windows平台下添加指定编译选项
 message("WIN32:${WIN32}")
