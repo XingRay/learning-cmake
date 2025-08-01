@@ -1,6 +1,6 @@
 # 指定 CMake 的最小版本号，低于此版本的 CMake 将终止建构档的生成过程
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson08_search_source)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -47,10 +47,10 @@ file(GLOB_RECURSE SRC_LIST
 message("SRC_LIST:${SRC_LIST}")
 
 add_executable(
-        demo
+        ${PROJECT_NAME}
         ${SRC_LIST}
 )
 
-set_target_properties(demo PROPERTIES
+set_target_properties(${PROJECT_NAME} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/build/output"
 )

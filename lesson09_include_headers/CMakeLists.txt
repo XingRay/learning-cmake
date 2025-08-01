@@ -1,6 +1,6 @@
 # 指定 CMake 的最小版本号，低于此版本的 CMake 将终止建构档的生成过程
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson09_include_headers)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -17,7 +17,7 @@ file(GLOB_RECURSE SRC_LIST
 #)
 
 add_executable(
-        demo
+        ${PROJECT_NAME}
         ${SRC_LIST}
 )
 # 使用 include_directories 指令后, 每个 target 的 INCLUDE_DIRECTORIES 属性都会添加指定的值

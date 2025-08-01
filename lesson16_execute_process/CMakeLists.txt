@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson16_execute_process)
 
 message("+--------------------+")
 message("|                    |")
@@ -32,6 +32,6 @@ message("+--------------------+")
 execute_process(COMMAND "ls" ${PROJECT_SOURCE_DIR} OUTPUT_VARIABLE ls_dir_output)
 message("ls_dir_output:${ls_dir_output}")
 
-add_executable(demo
+add_executable(${PROJECT_NAME}
         main.cpp
 )

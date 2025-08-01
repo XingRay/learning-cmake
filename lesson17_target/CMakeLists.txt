@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson17_target)
 
 # 给所有的target定义宏 GLOBAL_DEF1 GLOBAL_DEF2 不推荐这种方式, 推荐使用 target_compile_definitions
 add_definitions(-DGLOBAL_DEF1 -DGLOBAL_DEF2)
 
-add_executable(demo
+add_executable(${PROJECT_NAME}
         main.cpp
 )
 
@@ -42,11 +42,11 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 #INTERFACE : 在绑定当前目标时给指定的内容设置接口属性，通常在接口库中使用。其他目标在链接当前目标时，只允许访问其声明（接口）
 
 # 添加头文件
-target_include_directories(demo PUBLIC include)
+target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 # 将给 demo 添加链接的库 depend_lib
 target_link_libraries(
-        demo
+        ${PROJECT_NAME}
         PUBLIC depend_lib
 )
 
@@ -54,7 +54,7 @@ target_link_libraries(
 # PRIVATE 规定 demo 的 TEST_DEF1 TEST_DEF2 预编译宏不传递给其余目标
 # PUBLIC 规定 demo 的 TEST_PUB_DEF1 预编译宏将会传递给其余目标
 # 生成的建构档中会包含形如以下的内容 gcc -fPIC -shared main.cpp -o libmylib1.so -D HAVE_ABC
-target_compile_definitions(demo
+target_compile_definitions(${PROJECT_NAME}
         PRIVATE TEST_DEF1 TEST_DEF2
         PUBLIC TEST_PUB_DEF1
 )

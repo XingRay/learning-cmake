@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson05_if)
 
 message("+--------------------+")
 message("|                    |")
@@ -200,6 +200,6 @@ if (NOT ${path1} STREQUAL ${path2})
 endif ()
 
 
-add_executable(demo
+add_executable(${PROJECT_NAME}
         main.cpp
 )

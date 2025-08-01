@@ -1,6 +1,6 @@
 # 指定 CMake 的最小版本号，低于此版本的 CMake 将终止建构档的生成过程
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson13_test_dynamic_lib)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -15,26 +15,26 @@ file(GLOB_RECURSE DEMO_SRC_LIST
 #)
 
 add_executable(
-        demo
+        ${PROJECT_NAME}
         ${DEMO_SRC_LIST}
 )
 
 # 为目标指定链接库的名称
 # Windows平台下动态库的链接机制与Linux/macOS不同，CMake在链接阶段需要.lib文件（动态库的导入库），而非直接使用.dll文件
 target_link_libraries(
-        demo
+        ${PROJECT_NAME}
         PRIVATE calc
 )
 
 # 为目标指定搜索库的目录
 target_link_directories(
-        demo
+        ${PROJECT_NAME}
         PRIVATE lib
 )
 
 # 为目标指定搜索头文件的目录
 target_include_directories(
-        demo
+        ${PROJECT_NAME}
         PRIVATE include
 )
 
@@ -63,7 +63,7 @@ if (WIN32)
     message("CMAKE_SOURCE_DIR:${CMAKE_SOURCE_DIR}")
 
     # 构建完成后, 将 lib/calc.dll 复制到exe输出目录中, exe启动时会自动加载 dll 文件
-    add_custom_command(TARGET demo POST_BUILD
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
             # cmake -E copy ./lib/calc.dll ./build/output/runtime/Release/calc.dll
             COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_SOURCE_DIR}/lib/calc.dll"

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson03_varaiable)
 
 # 创建变量
 # set(var_name value0 value1 ... )
@@ -121,6 +121,6 @@ set(var1 ${var1} ${var2})
 message("var1:${var1}")
 
 
-add_executable(demo
+add_executable(${PROJECT_NAME}
         main.cpp
 )

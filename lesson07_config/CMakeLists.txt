@@ -1,6 +1,6 @@
 # 指定 CMake 的最小版本号，低于此版本的 CMake 将终止建构档的生成过程
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson07_config)
 
 message("+--------------------+")
 message("|                    |")
@@ -21,12 +21,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 # 设置源码的编码
-if(MSVC)
+if (MSVC)
     add_compile_options("$<$<C_COMPILER_ID:MSVC>:/source-charset:utf-8>")
     add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
-else()
+else ()
     add_compile_options(-finput-charset=UTF-8)
-endif()
+endif ()
 
 # 在windows平台下添加指定编译选项
 message("WIN32:${WIN32}")
@@ -46,7 +46,7 @@ endif ()
 set(SRC_LIST main.cpp)
 
 add_executable(
-        demo
+        ${PROJECT_NAME}
         ${SRC_LIST}
 )
 

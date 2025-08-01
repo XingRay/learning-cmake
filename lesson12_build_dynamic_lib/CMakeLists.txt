@@ -1,6 +1,6 @@
 # 指定 CMake 的最小版本号，低于此版本的 CMake 将终止建构档的生成过程
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson12_build_dynamic_lib)
 
 set(CMAKE_CXX_STANDARD 23)
 
@@ -11,20 +11,20 @@ file(GLOB_RECURSE CALC_SRC_LIST
 # 第一个参数是生成的库(target)的名称
 # 第二个参数是生成库的类型, 制作动态库时设置为 SHARED
 add_library(
-        calc
+        ${PROJECT_NAME}_calc
         SHARED
         ${CALC_SRC_LIST}
 )
 
 target_include_directories(
-        calc
+        ${PROJECT_NAME}_calc
         PUBLIC include
 )
 
 # 如果在 windows 平台
 if (WIN32)
     # 为 calc 编译添加宏定义
-    target_compile_definitions(calc
+    target_compile_definitions(${PROJECT_NAME}_calc
             PRIVATE LIB_STORAGE_SHARED LIB_STORAGE_SHARED_EXPORT
     )
 endif ()

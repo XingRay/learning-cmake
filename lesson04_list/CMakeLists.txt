@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson04_list)
 
 message("+--------------------+")
 message("|                    |")
@@ -132,6 +132,6 @@ list(SORT file_list COMPARE NATURAL)
 message("NATURAL SORT: ${file_list}")
 
 
-add_executable(demo
+add_executable(${PROJECT_NAME}
         main.cpp
 )

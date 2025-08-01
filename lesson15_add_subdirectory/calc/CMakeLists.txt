@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(calc)
+project(lesson15_add_subdirectory_calc)
 
 file(GLOB_RECURSE SRC_LIST
         *.cpp

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.31.6)
-project(demo)
+project(lesson06_loop)
 
 message("+--------------------+")
 message("|                    |")
@@ -95,6 +95,6 @@ while (${list_len} GREATER 0)
     list(LENGTH word_list list_len)
 endwhile ()
 
-add_executable(demo
+add_executable(${PROJECT_NAME}
         main.cpp
 )

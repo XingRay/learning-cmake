@@ -4,9 +4,9 @@ project(demo)
 
 # 输出日志
 #输出: hello
-message( "hello")
+message("hello")
 #输出: world
-message( world)
+message(world)
 
 # 日志级别
 # 通知(默认)消息,用于输出信息。
