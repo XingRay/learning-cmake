@@ -1,3 +1,6 @@
+# ncnn
+# https://github.com/Tencent/ncnn
+# set(ncnn_install_dir "D:/develop/ncnn/ncnn-20250503/build/install/windows/x64" CACHE STRING "ncnn install dir")
 function(import_ncnn ncnn_install_dir)
     message("import_ncnn: ncnn_install_dir:${ncnn_install_dir}")
     set(ncnn_base_dir "")

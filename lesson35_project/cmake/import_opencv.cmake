@@ -1,6 +1,7 @@
-#opencv
+# opencv
 # https://opencv.org/
 # https://github.com/opencv/opencv
+# set(opencv_install_dir "D:/develop/opencv/4.12.0/opencv/build/x64/vc16/lib" CACHE STRING "opencv install dir")
 function(import_opencv opencv_install_dir)
     message("import_opencv: opencv_install_dir:${opencv_install_dir}")
     set(OpenCV_DIR ${opencv_install_dir})

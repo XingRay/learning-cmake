@@ -1,3 +1,6 @@
+# glfw
+# https://github.com/glfw/glfw
+# set(glfw_install_dir "D:/develop/opengl/glfw/glfw-3.4.bin.WIN64" CACHE STRING "glfw install dir")
 function(import_glfw glfw_install_dir)
     message("import_glfw: glfw_install_dir:${glfw_install_dir}")
     if (IS_DIRECTORY ${glfw_install_dir})
